@@ -10,10 +10,9 @@ gpg -a --export CD2EFD2A | apt-key add -
 
 # add Percona repo
 # XXX: autodetect distribution when Percona supports Quantal
-VER='precise'
 cat <<EOL > /etc/apt/sources.list.d/percona.list
-deb http://repo.percona.com/apt $VER main
-deb-src http://repo.percona.com/apt $VER main
+deb http://repo.percona.com/apt $RELEASE main
+deb-src http://repo.percona.com/apt $RELEASE main
 EOL
 
 
