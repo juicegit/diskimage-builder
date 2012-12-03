@@ -1,7 +1,7 @@
 #!/bin/sh
 
 generate_empty_passphrase_ssh_key () {
-    exclaim "generating a empty passphrase DEV ONLY rsa key"
+    echo "generating a empty passphrase DEV ONLY rsa key"
     HOMEDIR=$1
     expect -c "
 spawn /usr/bin/ssh-keygen -f $HOMEDIR/.ssh/id_rsa -q
@@ -17,7 +17,7 @@ HOMEDIR=/home/ubuntu
 mkdir -p $HOMEDIR/.ssh
 if [ ! -e $HOMEDIR/.ssh/id_rsa.pub ]
 then
-    apt-get -y expect
+    apt-get -y install expect
 
     #generate a public key
     generate_empty_passphrase_ssh_key $HOMEDIR
