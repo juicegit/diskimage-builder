@@ -1,6 +1,6 @@
 #!/bin/sh
 
-function generate_empty_passphrase_ssh_key() {
+generate_empty_passphrase_ssh_key () {
     exclaim "generating a empty passphrase DEV ONLY rsa key"
     HOMEDIR=$1
     expect -c "
