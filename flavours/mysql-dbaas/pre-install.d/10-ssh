@@ -1,0 +1,28 @@
+
+function generate_empty_passphrase_ssh_key() {
+    exclaim "generating a empty passphrase DEV ONLY rsa key"
+    HOMEDIR=$1
+    expect -c "
+spawn /usr/bin/ssh-keygen -f $HOMEDIR/.ssh/id_rsa -q
+expect \"empty for no passphrase\"
+send \n
+expect assphrase
+send \n
+expect eof"
+}
+
+HOMEDIR=/home/ubuntu
+
+mkdir -p $HOMEDIR/.ssh
+if [ ! -e $HOMEDIR/.ssh/id_rsa.pub ]
+then
+    apt-get -y expect
+
+    #generate a public key
+    generate_empty_passphrase_ssh_key $HOMEDIR
+fi
+
+
+
+
+
