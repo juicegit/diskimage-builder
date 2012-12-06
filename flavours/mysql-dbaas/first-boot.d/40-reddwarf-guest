@@ -2,14 +2,14 @@
 
 # Copies all the reddwarf code to the guest image
 #sudo -u USERNAME rsync -e'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' -avz --exclude='.*' 10.0.0.1:PATH_REDDWARF/ /home/USERNAME/reddwarf_lite
-#sudo -u ubuntu rsync -e'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' -avz --exclude='.*' 10.0.0.1:/opt/stack/reddwarf_lite /home/ubuntu/reddwarf
+sudo -u ubuntu rsync -e'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' -avz --exclude='.*' 10.0.0.1:/opt/stack/reddwarf /home/ubuntu/reddwarf
 
 # Adds user to the sudoers file so they can do everything w/o a pass
-# echo 'ubuntu ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+echo 'ubuntu ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 # Do an apt-get update since its SUPER slow first time
 # apt-get update should not be needed at this time
 # apt-get update
 
 # Starts the reddwarf guestagent (using the upstart script)
-#service reddwarf-guest start
+service reddwarf-guest start
