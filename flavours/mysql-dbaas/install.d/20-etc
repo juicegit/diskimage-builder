@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo dd of=$TMP_MOUNT_PATH/etc/init/reddwarf-guest.conf << _EOF_
+dd of=/etc/init/reddwarf-guest.conf << _EOF_
 description "Reddwarf Guest"
 author "Auto-Gen"
 
