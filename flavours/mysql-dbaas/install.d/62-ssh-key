@@ -9,7 +9,7 @@ if [ -e "/tmp/in_target.d/ssh-authorized-keys" ]; then
         mkdir -p /home/ubuntu
 
     fi
-    sudo -u ubuntu mkdir ~ubuntu/.ssh
+#    sudo -u ubuntu mkdir ~ubuntu/.ssh
     sudo -Hiu ubuntu dd of=~ubuntu/.ssh/authorized_keys oflag=append conv=notrunc if=/tmp/in_target.d/ssh-authorized-keys
     sudo -Hiu ubuntu dd of=~ubuntu/.ssh/id_rsa oflag=append conv=notrunc if=/tmp/in_target.d/id_rsa
     sudo -Hiu ubuntu dd of=~ubuntu/.ssh/id_rsa.pub oflag=append conv=notrunc if=/tmp/in_target.d/id_rsa.pub
