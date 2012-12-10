@@ -87,6 +87,7 @@ function create_base () {
     sudo touch $TMP_MOUNT_PATH/etc/resolv.conf
     sudo chmod 777 $TMP_MOUNT_PATH/etc/resolv.conf
     echo nameserver 8.8.8.8 > $TMP_MOUNT_PATH/etc/resolv.conf
+    head -2 /etc/resolv.conf >> $TMP_MOUNT_PATH/etc/resolv.conf
 
     # supporting kernel file systems
     sudo mount -t proc none $TMP_MOUNT_PATH/proc
