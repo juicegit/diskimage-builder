@@ -10,11 +10,9 @@ if [ -e "/tmp/in_target.d/ssh-authorized-keys" ]; then
 
     fi
 #    sudo -u ubuntu mkdir ~ubuntu/.ssh
-    echo `ls -l ~ubuntu/.ssh/authorized_keys`
-    sudo -Hiu ubuntu dd of=~ubuntu/.ssh/authorized_keys oflag=append conv=notrunc if=/tmp/in_target.d/ssh-authorized-keys
-    echo `ls -l ~ubuntu/.ssh/id_rsa`
-    sudo -Hiu ubuntu dd of=~ubuntu/.ssh/id_rsa oflag=append conv=notrunc if=/tmp/in_target.d/id_rsa
-    echo `ls -l ~ubuntu/.ssh/id_rsa.pub`
+    echo `sudo -Hiu ubuntu ls -l ~ubuntu/.ssh/`
+    sudo -Hiu ubuntu dd of=~ubuntu/.ssh/authorized_keys conv=notrunc if=/tmp/in_target.d/ssh-authorized-keys
+    sudo -Hiu ubuntu dd of=~ubuntu/.ssh/id_rsa oflag=append conv= if=/tmp/in_target.d/id_rsa
     sudo -Hiu ubuntu dd of=~ubuntu/.ssh/id_rsa.pub oflag=append conv=notrunc if=/tmp/in_target.d/id_rsa.pub
 
 fi
