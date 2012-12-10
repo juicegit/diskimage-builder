@@ -4,9 +4,9 @@
 set -e
 set -o xtrace
 
-useradd -G admin -m stack -s /bin/bash
-passwd stack <<EOF
-stack
-stack
+useradd -G admin -m ubuntu -s /bin/bash
+passwd ubuntu <<EOF
+ubuntu
+ubuntu
 EOF
 

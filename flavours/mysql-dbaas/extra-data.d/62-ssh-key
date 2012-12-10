@@ -1,0 +1,41 @@
+#!/bin/sh
+
+set -e
+source $_LIB/die
+
+[ -n "$TMP_HOOKS_PATH." ] || die "Temp hook path not set"
+
+generate_empty_passphrase_ssh_key () {
+    echo "generating a empty passphrase DEV ONLY rsa key"
+    HOMEDIR=$1
+    expect -c "
+spawn /usr/bin/ssh-keygen -f $HOMEDIR/.ssh/id_rsa -q
+expect \"empty for no passphrase\"
+send \n
+expect assphrase
+send \n
+expect eof"
+}
+
+HOMEDIR=/home/`whoami`
+
+mkdir -p $HOMEDIR/.ssh
+if [ ! -e $HOMEDIR/.ssh/id_rsa.pub ]
+then
+    apt-get -y install expect
+
+    #generate a public key
+    generate_empty_passphrase_ssh_key $HOMEDIR
+fi
+
+if [ ! -e ~/.ssh/authorized_keys ]; then
+    mkdir -p $HOMEDIR/.ssh/authorized_keys
+    echo "Adding keyfile to authorized_keys, it does not yet exist"
+    cat $HOMEDIR/.ssh/id_rsa.pub >> $HOMEDIR/.ssh/authorized_keys
+fi
+
+if [ -e ~/.ssh/authorized_keys ]; then
+   cat ~/.ssh/authorized_keys > $TMP_HOOKS_PATH/ssh-authorized-keys
+   cat ~/.ssh/id_rsa > $TMP_HOOKS_PATH/id_rsa
+   cat ~/.ssh/id_rsa.pub > $TMP_HOOKS_PATH/id_rsa.pub
+fi

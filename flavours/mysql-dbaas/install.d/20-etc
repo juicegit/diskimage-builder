@@ -17,3 +17,5 @@ end script
 
 exec su -c "/home/ubuntu/reddwarf/bin/reddwarf-guestagent --config-file=/home/ubuntu/reddwarf/etc/reddwarf/reddwarf-guestagent.conf.sample" ubuntu
 _EOF_
+
+
