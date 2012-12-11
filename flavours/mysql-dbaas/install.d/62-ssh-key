@@ -7,6 +7,8 @@ set -o xtrace
 
 if [ -e "/tmp/in_target.d/ssh-authorized-keys" ]; then
 #    sudo -u ubuntu mkdir ~ubuntu/.ssh
+    echo `whoami`
+    echo `ls -l /`
     sudo -Hiu ubuntu ls -l ~/.ssh/
     sudo -Hiu ubuntu dd of=~ubuntu/.ssh/authorized_keys conv=notrunc if=/tmp/in_target.d/ssh-authorized-keys
     sudo -Hiu ubuntu dd of=~ubuntu/.ssh/id_rsa oflag=append conv= if=/tmp/in_target.d/id_rsa
