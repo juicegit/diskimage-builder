@@ -6,14 +6,11 @@ set -e
 set -o xtrace
 
 if [ -e "/tmp/in_target.d/ssh-authorized-keys" ]; then
-#    sudo -u ubuntu mkdir ~ubuntu/.ssh
-    whoami
-    ls -l /
     ls -al /home/ubuntu
-    cat /etc/passwd
-    sudo -Hiu ubuntu ls -l ~/.ssh/
+    if ! [ -e "/home/ubuntu/.ssh" ]; then
+        sudo -Hiu ubuntu mkdir ~ubuntu/.ssh/
+    fi
     sudo -Hiu ubuntu dd of=~ubuntu/.ssh/authorized_keys conv=notrunc if=/tmp/in_target.d/ssh-authorized-keys
     sudo -Hiu ubuntu dd of=~ubuntu/.ssh/id_rsa oflag=append conv= if=/tmp/in_target.d/id_rsa
     sudo -Hiu ubuntu dd of=~ubuntu/.ssh/id_rsa.pub oflag=append conv=notrunc if=/tmp/in_target.d/id_rsa.pub
-
 fi

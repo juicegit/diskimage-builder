@@ -12,16 +12,16 @@ send \n
 expect eof"
 }
 
-HOMEDIR=/home/ubuntu
+#HOMEDIR=/home/ubuntu
 
-mkdir -p $HOMEDIR/.ssh
-if [ ! -e $HOMEDIR/.ssh/id_rsa.pub ]
-then
-    apt-get -y install expect
+#sudo -Hiu ubuntu mkdir -p $HOMEDIR/.ssh
+#if [ ! -e $HOMEDIR/.ssh/id_rsa.pub ]
+#then
+#    apt-get -y install expect
 
     #generate a public key
-    generate_empty_passphrase_ssh_key $HOMEDIR
-fi
+#    generate_empty_passphrase_ssh_key $HOMEDIR
+#fi
 
 
 
