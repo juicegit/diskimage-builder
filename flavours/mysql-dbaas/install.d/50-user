@@ -7,9 +7,9 @@ set -o xtrace
 if ! id -u ubuntu >/dev/null 2>&1; then
     echo "Adding ubuntu user"
     useradd -G admin -m ubuntu -s /bin/bash
-    passwd ubuntu <<EOF
+    passwd ubuntu <<_EOF_
     ubuntu
     ubuntu
-    EOF
+    _EOF_
 fi
 
