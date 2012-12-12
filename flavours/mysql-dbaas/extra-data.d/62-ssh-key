@@ -22,14 +22,13 @@ HOMEDIR=/home/`whoami`
 mkdir -p $HOMEDIR/.ssh
 if [ ! -e $HOMEDIR/.ssh/id_rsa.pub ]
 then
-    apt-get -y install expect
+    sudo apt-get -y install expect
 
     #generate a public key
     generate_empty_passphrase_ssh_key $HOMEDIR
 fi
 
 if [ ! -e ~/.ssh/authorized_keys ]; then
-    mkdir -p $HOMEDIR/.ssh/authorized_keys
     echo "Adding keyfile to authorized_keys, it does not yet exist"
     cat $HOMEDIR/.ssh/id_rsa.pub >> $HOMEDIR/.ssh/authorized_keys
 fi
