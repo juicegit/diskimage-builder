@@ -5,6 +5,9 @@ source $_LIB/die
 
 [ -n "$TMP_HOOKS_PATH." ] || die "Temp hook path not set"
 
+echo ${USERNAME}
+if [ `whoami` == `root` ]; then die "You should not be root to create keys"
+
 generate_empty_passphrase_ssh_key () {
     echo "generating a empty passphrase DEV ONLY rsa key"
     HOMEDIR=$1
