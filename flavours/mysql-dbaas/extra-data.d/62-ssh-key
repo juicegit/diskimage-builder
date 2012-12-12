@@ -6,7 +6,7 @@ source $_LIB/die
 [ -n "$TMP_HOOKS_PATH." ] || die "Temp hook path not set"
 
 echo "USERNAME var is = ${USERNAME}"
-if [ `whoami` == `root` ]; then die "You should not be root to create keys"
+if [ `whoami` = "root" ]; then die "You should not be root to create keys"
 fi
 
 generate_empty_passphrase_ssh_key () {
