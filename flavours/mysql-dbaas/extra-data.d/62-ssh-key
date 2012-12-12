@@ -13,7 +13,7 @@ generate_empty_passphrase_ssh_key () {
     echo "generating a empty passphrase DEV ONLY rsa key"
     HOMEDIR=$1
     expect -c "
-spawn /usr/bin/ssh-keygen -f $HOMEDIR/.ssh/id_rsa -q
+spawn sudo -Hiu ubuntu /usr/bin/ssh-keygen -f $HOMEDIR/.ssh/id_rsa -q
 expect \"empty for no passphrase\"
 send \n
 expect assphrase
@@ -21,9 +21,12 @@ send \n
 expect eof"
 }
 
-HOMEDIR=/home/`whoami`
+HOMEDIR=/home/ubuntu
 
-mkdir -p $HOMEDIR/.ssh
+if [ ! -e $HOMEDIR/.ssh ]; then
+    sudo -Hiu ubuntu mkdir -p $HOMEDIR/.ssh
+fi
+
 if [ ! -e $HOMEDIR/.ssh/id_rsa.pub ]
 then
     sudo apt-get -y install expect
@@ -34,11 +37,11 @@ fi
 
 if [ ! -e ~/.ssh/authorized_keys ]; then
     echo "Adding keyfile to authorized_keys, it does not yet exist"
-    cat $HOMEDIR/.ssh/id_rsa.pub >> $HOMEDIR/.ssh/authorized_keys
+    sudo -Hiu ubuntu cat $HOMEDIR/.ssh/id_rsa.pub >> $HOMEDIR/.ssh/authorized_keys
 fi
 
 if [ -e ~/.ssh/authorized_keys ]; then
-   cat ~/.ssh/authorized_keys > $TMP_HOOKS_PATH/ssh-authorized-keys
-   cat ~/.ssh/id_rsa > $TMP_HOOKS_PATH/id_rsa
-   cat ~/.ssh/id_rsa.pub > $TMP_HOOKS_PATH/id_rsa.pub
+   sudo -Hiu ubuntu cat ~/.ssh/authorized_keys > $TMP_HOOKS_PATH/ssh-authorized-keys
+   sudo -Hiu ubuntu cat ~/.ssh/id_rsa > $TMP_HOOKS_PATH/id_rsa
+   sudo -Hiu ubuntu cat ~/.ssh/id_rsa.pub > $TMP_HOOKS_PATH/id_rsa.pub
 fi
