@@ -11,5 +11,6 @@ echo 'ubuntu ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 # apt-get update should not be needed at this time
 # apt-get update
 
+
 # Starts the reddwarf guestagent (using the upstart script)
 service reddwarf-guest start
