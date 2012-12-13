@@ -37,9 +37,10 @@ then
     generate_empty_passphrase_ssh_key $HOMEDIR
 fi
 
-if [ ! -e $HOMEDIR/.ssh/authorized_keys ]; then
+is_in_keyfile=`cat $HOMEDIR/.ssh/id_rsa.pub | grep -f - $HOMEDIR/.ssh/authorized_keys | wc -l`
+if [ $is_in_keyfile == 0 ]; then
     echo "Adding keyfile to authorized_keys, it does not yet exist"
-    sudo -Hiu ubuntu cat $HOMEDIR/.ssh/id_rsa.pub >> $HOMEDIR/.ssh/authorized_keys
+    cat $HOMEDIR/.ssh/id_rsa.pub >> $HOMEDIR/.ssh/authorized_keys
 fi
 
 if [ -e $HOMEDIR/.ssh/authorized_keys ]; then
