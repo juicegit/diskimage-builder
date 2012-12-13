@@ -5,7 +5,6 @@
 set -e
 set -o xtrace
 
-#DEBIAN_FRONTEND=noninteractive apt-get -y install sysstat mytop percona-toolkit percona-server-server-5.5 percona-server-client-5.5
 export DEBIAN_FRONTEND=noninteractive
 apt-get -y install python-dev libxml2-dev libxslt1-dev python-setuptools python-pip python-sqlalchemy python-lxml \
     python-routes python-eventlet python-webob python-kombu python-pastedeploy python-paste python-netaddr \
