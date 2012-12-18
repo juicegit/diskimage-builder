@@ -23,13 +23,13 @@ send \n
 expect eof"
 }
 
-HOMEDIR=/home/ubuntu
+HOMEDIR=/home/${USERNAME}
 
 if [ ! -e $HOMEDIR/.ssh ]; then
-    sudo -Hiu ubuntu mkdir -p $HOMEDIR/.ssh
+    sudo -Hiu ${USERNAME} mkdir -p $HOMEDIR/.ssh
 fi
 
-if [ ! -e $HOMEDIR/.ssh/id_rsa.pub ]
+if [ ! -f $HOMEDIR/.ssh/id_rsa.pub ]
 then
     sudo apt-get -y install expect
 
@@ -44,7 +44,7 @@ if [ $is_in_keyfile == 0 ]; then
 fi
 
 if [ -e $HOMEDIR/.ssh/authorized_keys ]; then
-   sudo -Hiu ubuntu cat $HOMEDIR/.ssh/authorized_keys > $TMP_HOOKS_PATH/ssh-authorized-keys
-   sudo -Hiu ubuntu cat $HOMEDIR/.ssh/id_rsa > $TMP_HOOKS_PATH/id_rsa
-   sudo -Hiu ubuntu cat $HOMEDIR/.ssh/id_rsa.pub > $TMP_HOOKS_PATH/id_rsa.pub
+   sudo -Hiu ${USERNAME} cat $HOMEDIR/.ssh/authorized_keys > $TMP_HOOKS_PATH/ssh-authorized-keys
+   sudo -Hiu ${USERNAME} cat $HOMEDIR/.ssh/id_rsa > $TMP_HOOKS_PATH/id_rsa
+   sudo -Hiu ${USERNAME} cat $HOMEDIR/.ssh/id_rsa.pub > $TMP_HOOKS_PATH/id_rsa.pub
 fi
