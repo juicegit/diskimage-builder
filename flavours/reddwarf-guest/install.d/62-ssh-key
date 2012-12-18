@@ -6,7 +6,6 @@ set -e
 set -o xtrace
 
 if [ -e "/tmp/in_target.d/ssh-authorized-keys" ]; then
-    ls -al /home/ubuntu
     if ! [ -e "/home/ubuntu/.ssh" ]; then
         sudo -Hiu ubuntu mkdir ~ubuntu/.ssh/
     fi

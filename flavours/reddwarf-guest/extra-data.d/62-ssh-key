@@ -7,7 +7,10 @@ source $_LIB/die
 
 [ -n "$TMP_HOOKS_PATH." ] || die "Temp hook path not set"
 
-echo "USERNAME var is = ${USERNAME}"
+if [ -z $USERNAME ]; then
+    die "User Name needs to be set to the user for the guest VM"
+fi
+
 if [ `whoami` = "root" ]; then die "You should not be root to create keys"
 fi
 
