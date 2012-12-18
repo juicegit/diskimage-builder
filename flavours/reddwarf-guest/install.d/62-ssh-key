@@ -17,3 +17,5 @@ if [ -e "/tmp/in_target.d/ssh-authorized-keys" ]; then
         sudo -Hiu ubuntu dd of=~ubuntu/.ssh/id_rsa.pub if=/tmp/in_target.d/id_rsa.pub
     fi
 fi
+
+# TODO should be an else here

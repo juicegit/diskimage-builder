@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+set -o xtrace
+
+source $_LIB/die
+
+[ -n "$TMP_HOOKS_PATH." ] || die "Temp hook path not set"
+
+[ -n "${USERNAME}" ] || die "USERNAME needs to be set to the user for the guest VM"
+[ -n "${REDSTACK_SCRIPTS}" ] || die "REDSTACK_SCRIPTS needs to be set to the reddwarf-integration scripts dir"
+[ -n "${SERVICE_TYPE}" ] || die "SERVICE_TYPE must be set to something like mysql to create upstart conf"
+
+# put this file in first-boot.d directory so that it is executed on startup
+sed "s/USERNAME/${USERNAME}/g" ${REDSTACK_SCRIPTS}/bootstrap_init-${SERVICE_TYPE}.sh > ${TMP_HOOKS_PATH}/first-boot.d/bootstrap_init-${SERVICE_TYPE}.sh
+
+sed "s/USERNAME/${USERNAME}/g" ${REDSTACK_SCRIPTS}/reddwarf-guest.upstart.conf > ${TMP_HOOKS_PATH}/reddwarf-guest.conf
