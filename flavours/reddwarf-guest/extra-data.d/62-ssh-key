@@ -7,12 +7,9 @@ source $_LIB/die
 
 [ -n "$TMP_HOOKS_PATH." ] || die "Temp hook path not set"
 
-if [ -z $USERNAME ]; then
-    die "User Name needs to be set to the user for the guest VM"
-fi
+[ -n "${USERNAME}" ] || die "User Name needs to be set to the user for the guest VM"
 
-if [ `whoami` = "root" ]; then die "You should not be root to create keys"
-fi
+#[ `whoami` = "root" ] || die "You should not be root to create keys"
 
 generate_empty_passphrase_ssh_key () {
     echo "generating a empty passphrase DEV ONLY rsa key"
